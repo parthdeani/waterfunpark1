@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM — CINEMATIC IMMERSIVE
+   ═══════════════════════════════════════════ */
+
+@theme {
+  --color-ink: #0a0a12;
+  --color-ink-light: #16162a;
+  --color-ink-muted: #3a3a5e;
+  --color-paper: #f5f0e8;
+  --color-paper-warm: #efe8d8;
+  --color-water: #2d6a8f;
+  --color-water-light: #4a9fd4;
+  --color-water-glow: rgba(74, 159, 212, 0.4);
+  --color-sun: #e8a838;
+  --color-sun-light: #f0c060;
+
+  --font-display: 'Outfit', sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+}
+
+/* ── BASE RESET ── */
+* {
+  cursor: none !important;
+}
+
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto; /* Lenis handles this */
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+/* ── SVG GRAIN TEXTURE ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  mix-blend-mode: overlay;
+}
+
+/* ── SCROLL PROGRESS ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-water), var(--color-water-light));
+  z-index: 100000;
+  transform-origin: left;
+  will-change: transform;
+}
+
+/* ── HERO VIDEO ── */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ── GLASSMORPHISM CARD ── */
+.glass-card {
+  background: rgba(10, 10, 18, 0.45);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(245, 240, 232, 0.08);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(245, 240, 232, 0.03) inset,
+    0 1px 0 rgba(245, 240, 232, 0.06) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 240, 232, 0.12),
+    transparent
+  );
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at 30% 20%,
+    rgba(74, 159, 212, 0.06),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* ── POINTER LINE GLOW ── */
+.pointer-line-glow {
+  filter: drop-shadow(0 0 6px rgba(74, 159, 212, 0.5))
+          drop-shadow(0 0 12px rgba(74, 159, 212, 0.2));
+}
+
+/* ── FLOATING ANIMATION ── */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.float-gentle {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* ── SELECTION ── */
+::selection {
+  background: var(--color-water);
+  color: var(--color-paper);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-muted);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-water);
+}
