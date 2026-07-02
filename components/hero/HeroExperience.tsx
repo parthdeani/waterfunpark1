@@ -109,7 +109,7 @@ export default function HeroExperience({ onLoaded }: { onLoaded?: () => void }) 
         {/* ── Full-Screen Looping Video ── */}
         <video
           ref={videoRef}
-          src="/hero-video.mp4"
+          src="https://res.cloudinary.com/dr3vva4uq/video/upload/v1782995012/hero-video.mp4"
           autoPlay
           loop
           muted
